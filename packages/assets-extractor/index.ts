@@ -65,4 +65,18 @@ export async function extractAssets(jarData: ArrayBuffer, distPath: string) {
   if (!distPath) {
     throw new Error('distPath is required');
   }
+
+  const tempJar = `${distPath}/.temp-client.jar`;
+
+  try {
+    await Bun.$`mkdir -p ${distPath}`.quiet();
+
+    await Bun.write(tempJar, jarData);
+
+    await Bun.$`unzip -q -o ${tempJar} "assets/minecraft/textures/item/*" "assets/minecraft/textures/block/*" -d ${distPath}`;
+
+    console.log(`Assets extracted to ${distPath}`);
+  } finally {
+    await Bun.$`rm -f ${tempJar}`.quiet();
+  }
 }
