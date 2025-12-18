@@ -17,6 +17,10 @@
     "./blocks": {
       "import": "./dist/blocks.js",
       "types": "./dist/blocks.d.ts"
+    },
+    "./sounds": {
+      "import": "./dist/sounds.js",
+      "types": "./dist/sounds.d.ts"
     }
   },
   "files": [
@@ -24,7 +28,7 @@
     "assets"
   ],
   "scripts": {
-    "build": "bun build ./src/index.ts ./src/items.ts ./src/blocks.ts --outdir=dist --target=browser --external react --external react-dom && bun run build:types",
+    "build": "bun build ./src/index.ts ./src/items.ts ./src/blocks.ts ./src/sounds.ts --outdir=dist --target=browser --external react --external react-dom && bun run build:types",
     "build:types": "tsc --emitDeclarationOnly --declaration --outDir dist",
     "prepublishOnly": "bun run build"
   },
